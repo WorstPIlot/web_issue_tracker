@@ -4,7 +4,7 @@ from .models import Issues
 
 
 def index(request):
-    issue = Issues.objects.all()
+    issues = Issues.objects.all()
     return render(request, "index.html",
-                  {'title': "Основная страница сайта", 'issue': issue
+                  {'title': "Основная страница сайта", 'issues': issues
                    })
