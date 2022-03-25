@@ -3,7 +3,7 @@ from django.db import models
 
 
 class Issues(models.Model):
-    issue_id = models.IntegerField()
+    issue_id = models.IntegerField(primary_key=True)
     owner_id = models.IntegerField()
     public = models.IntegerField()
     tags = models.CharField(max_length=254)
