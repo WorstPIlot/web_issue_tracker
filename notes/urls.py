@@ -1,4 +1,4 @@
-"""mysite URL Configuration
+"""notes URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/4.0/topics/http/urls/
@@ -15,9 +15,11 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from . import views
+
+from document.views import editor, delete_document
 
 urlpatterns = [
+    path('', editor, name='editor'),
+    path('delete_document/<int:docid>/', delete_document, name='delete_document'),
     path('admin/', admin.site.urls),
-    path('', views.index, name='index'),
 ]
