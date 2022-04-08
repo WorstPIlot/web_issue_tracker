@@ -12,16 +12,18 @@ def editor(request):
         docid = int(request.POST.get('docid', 0))
         title = request.POST.get('title')
         content = request.POST.get('content', '')
+        priority = request.POST.get('priority')
 
         if docid > 0:
             document = Document.objects.get(pk=docid)
             document.title = title
             document.content = content
+            document.priority = priority
             document.save()
 
             return redirect('/?docid=%i' % docid)
         else:
-            document = Document.objects.create(title=title, content=content)
+            document = Document.objects.create(title=title, content=content, priority=priority)
 
             return redirect('/?docid=%i' % document.id)
 
