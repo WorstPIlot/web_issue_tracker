@@ -55,6 +55,18 @@
                         <div class="control">
                             <input type="text" class="input" name="title" placeholder="Title" {% if document %} value="{{ document.title}}" {% endif %}>
                         </div>
+
+                        <div class="control">
+                            <label for="priority">Приоритет:</label>
+                            <select name="priority" id="priority">
+                                <option value="0">Не задан</option>
+                                <option value="1">Высокий</option>
+                                <option value="2">Средний</option>
+                                <option value="3">Низкий</option>
+                                <option value="4">Отменено</option>
+                                <option value="5">Решено</option>
+                            </select>
+                        </div>
                     </div>
 
                     <div class="field">
