@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 
 # Create your views here.
-from .models import Document
+from .models import Document, Priority
 
 
 def editor(request):
@@ -10,20 +10,20 @@ def editor(request):
 
     if request.method == 'POST':
         docid = int(request.POST.get('docid', 0))
-        title = request.POST.get('title')
-        content = request.POST.get('content', '')
-        priority = request.POST.get('priority')
+        title = request.POST.get('title').strip()
+        content = request.POST.get('content', '').strip()
+        priority = request.POST.get('priority').strip()
 
         if docid > 0:
             document = Document.objects.get(pk=docid)
             document.title = title
             document.content = content
-            document.priority = priority
+            document.priority = Priority.objects.get(id=priority)
             document.save()
 
             return redirect('/?docid=%i' % docid)
         else:
-            document = Document.objects.create(title=title, content=content, priority=priority)
+            document = Document.objects.create(title=title, content=content, priority=Priority.objects.get(id=priority))
 
             return redirect('/?docid=%i' % document.id)
 
@@ -32,10 +32,12 @@ def editor(request):
     else:
         document = ''
 
+    priorities = Priority.objects.all()
     context = {
         'docid': docid,
         'documents': documents,
-        'document': document
+        'document': document,
+        'priorities': priorities
     }
 
     return render(request, 'editor.html', context)

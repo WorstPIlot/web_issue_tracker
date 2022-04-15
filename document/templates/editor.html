@@ -56,18 +56,17 @@
                             <input type="text" class="input" name="title" placeholder="Title" {% if document %} value="{{ document.title}}" {% endif %}>
                         </div>
 
-                        <div class="control">
-                            <label for="priority">Приоритет сейчас: {{ document.priority }}</label>
-                            <select name="priority" id="priority">
-                                <option value="0">0. Не задан</option>
-                                <option value="1">1. Высокий</option>
-                                <option value="2">2. Средний</option>
-                                <option value="3">3. Низкий</option>
-                                <option value="4">4. Отменено</option>
-                                <option value="5">5. Решено</option>
-                            </select>
-                        </div>
+                    <div class="control">
+                        <label for="priority">Приоритет сейчас: </label>
+                        <select name="priority" id="priority">
+                            {% for priority in priorities %}
+                                <option value="{{ priority.id }}"
+                                        {% if document.priority.id == priority.id %} selected="selected" {% endif %}
+                                >{{ priority.id }}. {{ priority.name }}</option>
+                            {% endfor %}
+                        </select>
                     </div>
+                </div>
 
                     <div class="field">
                         <label class="label">Content</label>
